@@ -14,7 +14,7 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <Phone size={14} />
-              <span>04362-457620 | +91 81224 57956</span>
+              {/* <span>04362-457620 | +91 81224 57956</span> */}
             </div>
             <div className="flex items-center space-x-1">
               <Mail size={14} />
