@@ -9,23 +9,12 @@ const Header = () => {
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* Top contact bar */}
-      <div className="bg-blue-600 text-white py-2">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              <Phone size={14} />
-              {/* <span>04362-457620 | +91 81224 57956</span> */}
-            </div>
-            <div className="flex items-center space-x-1">
-              <Mail size={14} />
-              <span>info.climeairengineers@gmail.com</span>
-            </div>
-          </div>
-          <div className="hidden md:block">
-            <span>Minimal Effort. Maximum Efficiency</span>
-          </div>
-        </div>
-      </div>
+     <div className="bg-blue-600 text-white py-2">
+  <div className="container mx-auto px-4 flex justify-center items-center text-sm">
+    <span className="text-center">Minimal Effort. Maximum Efficiency</span>
+  </div>
+</div>
+
 
       {/* Main navigation */}
       <nav className="container mx-auto px-4 py-4">
