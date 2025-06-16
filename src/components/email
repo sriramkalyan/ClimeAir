@@ -1,0 +1,12 @@
+📩 New Contact Request
+
+👤 Full Name: {{user_name}}
+📧 Email Address: {{user_email}}
+📱 Phone Number: {{phone_number}}
+🔧 Service Required: {{service}}
+
+📝 Message:
+{{message}}
+
+----
+Sent via website contact form

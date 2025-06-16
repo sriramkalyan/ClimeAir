@@ -34,10 +34,10 @@ const Contact = () => {
     e.preventDefault();
 
     emailjs.send(
-      "service_7057kni",
-      "template_8tl5fr9",
+      "service_tc79tu3",
+      "template_pox5geb",
       formData,
-      "AiZs-zFdOGDDN3gsq"
+      "PahM2nGBzayHHl4wE"
     )
     .then((result) => {
       console.log("Email successfully sent!", result.text);
