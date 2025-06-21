@@ -8,10 +8,11 @@ const Hero = () => {
       {/* Background image */}
       <div className="absolute inset-0">
         <img 
-          src="https://images.pexels.com/photos/32668420/pexels-photo-32668420.jpeg"
-          alt="HVAC System Background"
-          className="w-full h-full object-cover "
-        />
+  src="https://images.pexels.com/photos/32668420/pexels-photo-32668420.jpeg"
+  alt="HVAC System Background"
+  className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-screen object-cover"
+/>
+
         <div className="absolute inset-0 bg-black opacity-60"></div>
       </div>
   {/* Floating Contact Icons */}
