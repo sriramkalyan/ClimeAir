@@ -8,7 +8,7 @@ const Hero = () => {
       {/* Background image */}
       <div className="absolute inset-0">
         <img 
-          src="/src/components/img.png"
+          src="https://images.pexels.com/photos/32668420/pexels-photo-32668420.jpeg"
           alt="HVAC System Background"
           className="w-full h-full object-cover "
         />
