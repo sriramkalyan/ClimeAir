@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+
+import { ArrowRight, CheckCircle, Phone, Mail, MessageCircle } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -7,11 +8,51 @@ const Hero = () => {
       {/* Background image */}
       <div className="absolute inset-0">
         <img 
-          src="https://images.pexels.com/photos/159045/the-interior-of-the-repair-interior-159045.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+          src="/src/components/img.png"
           alt="HVAC System Background"
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover "
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-blue-700/80 to-blue-800/80"></div>
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+      </div>
+  {/* Floating Contact Icons */}
+      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 space-y-4">
+        {/* WhatsApp */}
+        <a 
+          href="https://wa.me/918122457956" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-14 h-14 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300 group"
+          title="WhatsApp"
+        >
+          <MessageCircle size={24} />
+          <div className="absolute right-16 bg-green-500 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+            Chat on WhatsApp
+          </div>
+        </a>
+
+        {/* Phone */}
+        <a 
+          href="tel:+918122457956" 
+          className="flex items-center justify-center w-14 h-14 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 hover:scale-110 transition-all duration-300 group"
+          title="Call Us"
+        >
+          <Phone size={24} />
+          <div className="absolute right-16 bg-blue-500 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+            Call Now
+          </div>
+        </a>
+
+        {/* Email */}
+        <a 
+          href="mailto:info.climeairengineers@gmail.com" 
+          className="flex items-center justify-center w-14 h-14 bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600 hover:scale-110 transition-all duration-300 group"
+          title="Email Us"
+        >
+          <Mail size={24} />
+          <div className="absolute right-16 bg-red-500 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+            Send Email
+          </div>
+        </a>
       </div>
 
       {/* Background pattern */}
@@ -19,19 +60,19 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.1%22%3E%3Ccircle cx=%2230%22 cy=%2230%22 r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="container mx-auto px-4 relative z-10 t	">
+        <div className="max-w-4xl mx-auto text-center ">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
             Professional HVAC Solutions
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
+          <p className="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed drop-shadow-[2px_2px_6px_rgba(0,0,0,0.85)]">
             Design, Execution, Testing & Commissioning of Heating, Ventilation and Air Conditioning Systems
           </p>
           
-          <div className="flex flex-wrap justify-center gap-6 mb-10">
+          <div className="flex flex-wrap justify-center gap-8 mb-10">
             <div className="flex items-center space-x-2">
               <CheckCircle className="text-green-400" size={20} />
-              <span className="text-lg">15+ Years Experience</span>
+              <span className="text-lg drop-shadow-[2px_2px_6px_rgba(0,0,0,1)]">15+ Years individual directors and <br></br> engineers experiences</span>
             </div>
             <div className="flex items-center space-x-2">
               <CheckCircle className="text-green-400" size={20} />
@@ -62,8 +103,8 @@ const Hero = () => {
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-blue-400 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-blue-300 rounded-full opacity-20 animate-pulse delay-1000"></div>
+      {/* <div className="absolute top-20 left-10 w-20 h-20 bg-blue-400 rounded-full opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-32 h-32 bg-blue-300 rounded-full opacity-20 animate-pulse delay-1000"></div> */}
     </section>
   );
 };

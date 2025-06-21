@@ -17,22 +17,17 @@ const Projects = () => {
     },
     {
       icon: Hospital,
-      name: 'Navaladian Dental Clinic',
+      name: 'Navaladian Dental and Clinic',
       location: 'Thennur',
       type: 'Healthcare'
     },
-    {
-      icon: Hospital,
-      name: 'Navaladian Clinic',
-      location: 'Oil Mill',
-      type: 'Healthcare'
-    },
-    {
-      icon: Hospital,
-      name: 'Arun Hospital',
-      location: 'Vedaranyam',
-      type: 'Healthcare'
-    },
+    // {
+    //   icon: Hospital,
+    //   name: 'Navaladian Clinic',
+    //   location: 'Oil Mill',
+    //   type: 'Healthcare'
+    // },
+    
     {
       icon: Building,
       name: 'Muthumani Mahal',
