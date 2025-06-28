@@ -20,7 +20,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Professional HVAC solutions with over 15 years of experience. We specialize in 
+              Professional HVAC solutions with over 15 years of individual experience. We specialize in 
               design, execution, testing, and commissioning of heating, ventilation, and air 
               conditioning systems for commercial and industrial applications.
             </p>

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import emailjs from 'emailjs-com';
+import { motion } from 'framer-motion';
 import {
   MapPin,
   Phone,
@@ -39,8 +40,7 @@ const Contact = () => {
       formData,
       "PahM2nGBzayHHl4wE"
     )
-    .then((result) => {
-      console.log("Email successfully sent!", result.text);
+    .then(() => {
       setIsSubmitted(true);
       setFormData({
         user_name: '',
@@ -84,21 +84,39 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Contact Us</h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Get in touch with us for professional HVAC solutions and consultations
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h3 className="text-2xl font-bold text-gray-800 mb-8">Get In Touch</h3>
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                <motion.div
+                  key={index}
+                  className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
                   <div className="bg-blue-100 p-3 rounded-lg">
                     <info.icon className="w-6 h-6 text-blue-600" />
                   </div>
@@ -106,11 +124,17 @@ const Contact = () => {
                     <h4 className="text-lg font-semibold text-gray-800 mb-2">{info.title}</h4>
                     <p className="text-gray-600 whitespace-pre-line">{info.details}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            <div className="mt-8 p-6 bg-blue-50 rounded-lg">
+            <motion.div
+              className="mt-8 p-6 bg-blue-50 rounded-lg"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <div className="flex items-center space-x-3 mb-4">
                 <Clock className="w-6 h-6 text-blue-600" />
                 <h4 className="text-lg font-semibold text-gray-800">Business Hours</h4>
@@ -120,48 +144,56 @@ const Contact = () => {
                 <p>Sunday: Emergency Services Only</p>
                 <p className="mt-2 text-blue-600 font-medium">24/7 Emergency Support Available</p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h3 className="text-2xl font-bold text-gray-800 mb-8">Send Us a Message</h3>
             <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="user_name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="user_name"
-                    name="user_name"
-                    required
-                    value={formData.user_name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your full name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="user_email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="user_email"
-                    name="user_email"
-                    required
-                    value={formData.user_email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
+              <motion.div className="grid md:grid-cols-2 gap-6" initial="hidden" animate="visible" variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.1 }
+                }
+              }}>
+                {['user_name', 'user_email'].map((field, index) => (
+                  <motion.div
+                    key={field}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <label htmlFor={field} className="block text-sm font-medium text-gray-700 mb-2">
+                      {field === 'user_name' ? 'Full Name *' : 'Email Address *'}
+                    </label>
+                    <input
+                      type={field === 'user_email' ? 'email' : 'text'}
+                      id={field}
+                      name={field}
+                      required
+                      value={formData[field as keyof typeof formData]}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      placeholder={field === 'user_email' ? 'your.email@example.com' : 'Your full name'}
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
                   <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700 mb-2">
                     Phone Number
                   </label>
@@ -174,8 +206,13 @@ const Contact = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                     placeholder="+91 XXXXX XXXXX"
                   />
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
                   <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
                     Service Required
                   </label>
@@ -194,10 +231,15 @@ const Contact = () => {
                     <option value="Consultation">Consultation</option>
                     <option value="Other">Other</option>
                   </select>
-                </div>
+                </motion.div>
               </div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                   Message *
                 </label>
@@ -211,12 +253,14 @@ const Contact = () => {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   placeholder="Please describe your requirements..."
                 ></textarea>
-              </div>
+              </motion.div>
 
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitted}
-                className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
                 {isSubmitted ? (
                   <>
@@ -229,9 +273,9 @@ const Contact = () => {
                     <span>Send Message</span>
                   </>
                 )}
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

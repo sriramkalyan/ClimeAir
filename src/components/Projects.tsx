@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { MapPin, Building, Home, Guitar as Hospital, Factory } from 'lucide-react';
 
 const Projects = () => {
@@ -21,13 +22,6 @@ const Projects = () => {
       location: 'Thennur',
       type: 'Healthcare'
     },
-    // {
-    //   icon: Hospital,
-    //   name: 'Navaladian Clinic',
-    //   location: 'Oil Mill',
-    //   type: 'Healthcare'
-    // },
-    
     {
       icon: Building,
       name: 'Muthumani Mahal',
@@ -80,71 +74,82 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Projects & Clients</h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We have successfully served diverse clients across various sectors with specialized HVAC solutions
           </p>
-        </div>
+        </motion.div>
 
-        {/* Project Categories with Images */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div className="relative overflow-hidden rounded-lg shadow-lg group">
-            <img 
-              src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=400"
-              alt="Residential Projects"
-              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-green-900/80 to-transparent"></div>
-            <div className="absolute bottom-4 left-4 text-white">
-              <h4 className="text-lg font-bold">Residential</h4>
-              <p className="text-green-100 text-sm">Luxury villas & homes</p>
-            </div>
-          </div>
-          <div className="relative overflow-hidden rounded-lg shadow-lg group">
-            <img 
-              src="https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?auto=compress&cs=tinysrgb&w=400"
-              alt="Commercial Projects"
-              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent"></div>
-            <div className="absolute bottom-4 left-4 text-white">
-              <h4 className="text-lg font-bold">Commercial</h4>
-              <p className="text-blue-100 text-sm">Offices & retail spaces</p>
-            </div>
-          </div>
-          <div className="relative overflow-hidden rounded-lg shadow-lg group">
-            <img 
-              src="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=400"
-              alt="Healthcare Projects"
-              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 to-transparent"></div>
-            <div className="absolute bottom-4 left-4 text-white">
-              <h4 className="text-lg font-bold">Healthcare</h4>
-              <p className="text-red-100 text-sm">Hospitals & clinics</p>
-            </div>
-          </div>
-          <div className="relative overflow-hidden rounded-lg shadow-lg group">
-            <img 
-              src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=400"
-              alt="Industrial Projects"
-              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/80 to-transparent"></div>
-            <div className="absolute bottom-4 left-4 text-white">
-              <h4 className="text-lg font-bold">Industrial</h4>
-              <p className="text-purple-100 text-sm">Factories & warehouses</p>
-            </div>
-          </div>
-        </div>
+        {/* Category Cards */}
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          initial="hidden"
+          whileInView="visible"
+          transition={{ staggerChildren: 0.2 }}
+          viewport={{ once: true }}
+        >
+          {['Residential', 'Commercial', 'Healthcare', 'Industrial'].map((cat, i) => (
+            <motion.div
+              key={i}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.5 }}
+              className="relative overflow-hidden rounded-lg shadow-lg group"
+            >
+              <img
+                src={
+                  [
+                    "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg",
+                    "https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg",
+                    "https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg",
+                    "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg",
+                  ][i]
+                }
+                alt={`${cat} Projects`}
+                className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-t from-${cat === 'Residential' ? 'green' : cat === 'Commercial' ? 'blue' : cat === 'Healthcare' ? 'red' : 'purple'}-900/80 to-transparent`}></div>
+              <div className="absolute bottom-4 left-4 text-white">
+                <h4 className="text-lg font-bold">{cat}</h4>
+                <p className="text-sm">{cat === 'Residential' ? 'Luxury villas & homes' : cat === 'Commercial' ? 'Offices & retail spaces' : cat === 'Healthcare' ? 'Hospitals & clinics' : 'Factories & warehouses'}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Project List */}
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+        >
           {projects.map((project, index) => (
-            <div 
-              key={index} 
+            <motion.div
+              key={index}
               className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.4 }}
             >
               <div className="flex items-start space-x-4">
                 <div className="bg-blue-100 p-3 rounded-lg group-hover:bg-blue-200 transition-colors duration-300">
@@ -161,24 +166,31 @@ const Projects = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="text-center mt-16">
+        {/* CTA */}
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to Start Your Project?</h3>
             <p className="text-gray-600 mb-6">
               Join our satisfied clients and experience professional HVAC solutions tailored to your needs
             </p>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 inline-block"
             >
               Discuss Your Project
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
