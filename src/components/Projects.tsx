@@ -1,8 +1,92 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Building, Home, Guitar as Hospital, Factory } from 'lucide-react';
+import { MapPin, Building, Home, Stethoscope, Factory } from 'lucide-react';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 
 const Projects = () => {
+  const leftRef = useRef(null);
+ const rightRef = useRef(null);
+  const topRef = useRef(null);
+   const bottomRef = useRef(null);
+gsap.registerPlugin(ScrollTrigger);
+
+
+
+  useEffect(() => {
+    if (leftRef.current) {
+      gsap.fromTo(
+        leftRef.current,
+        { x: -200, opacity: 0 }, // starting position
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: leftRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+    if (rightRef.current) {
+      gsap.fromTo(
+        rightRef.current,
+        { x: 200, opacity: 0 }, // starting position
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: rightRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+    if (topRef.current) {
+      gsap.fromTo(
+        topRef.current,
+        { y: 200, opacity: 0 }, // starting position
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: topRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+    if (bottomRef.current) {
+      gsap.fromTo(
+        bottomRef.current,
+        { y: -200, opacity: 0 }, // starting position
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: bottomRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+  }, []);
   const projects = [
     {
       icon: Home,
@@ -17,7 +101,7 @@ const Projects = () => {
       type: 'Institutional'
     },
     {
-      icon: Hospital,
+      icon: Stethoscope,
       name: 'Navaladian Dental and Clinic',
       location: 'Thennur',
       type: 'Healthcare'
@@ -60,7 +144,7 @@ const Projects = () => {
     }
   ];
 
-  const getTypeColor = (type: string) => {
+  const getTypeColor = (type) => {
     switch (type) {
       case 'Residential': return 'bg-green-100 text-green-800';
       case 'Healthcare': return 'bg-red-100 text-red-800';
@@ -74,36 +158,19 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Projects & Clients</h2>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4" ref={leftRef}>Our Projects & Clients</h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto" ref={rightRef}>
             We have successfully served diverse clients across various sectors with specialized HVAC solutions
           </p>
-        </motion.div>
+        </div>
 
         {/* Category Cards */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
-          initial="hidden"
-          whileInView="visible"
-          transition={{ staggerChildren: 0.2 }}
-          viewport={{ once: true }}
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16" ref={bottomRef}>
           {['Residential', 'Commercial', 'Healthcare', 'Industrial'].map((cat, i) => (
-            <motion.div
+            <div
               key={i}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.5 }}
               className="relative overflow-hidden rounded-lg shadow-lg group"
             >
               <img
@@ -123,33 +190,16 @@ const Projects = () => {
                 <h4 className="text-lg font-bold">{cat}</h4>
                 <p className="text-sm">{cat === 'Residential' ? 'Luxury villas & homes' : cat === 'Commercial' ? 'Offices & retail spaces' : cat === 'Healthcare' ? 'Hospitals & clinics' : 'Factories & warehouses'}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Project List */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.15,
-              },
-            },
-          }}
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" ref={rightRef}>
           {projects.map((project, index) => (
-            <motion.div
+            <div
               key={index}
               className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.4 }}
             >
               <div className="flex items-start space-x-4">
                 <div className="bg-blue-100 p-3 rounded-lg group-hover:bg-blue-200 transition-colors duration-300">
@@ -166,18 +216,12 @@ const Projects = () => {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
+        <div className="text-center mt-16">
           <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to Start Your Project?</h3>
             <p className="text-gray-600 mb-6">
@@ -190,7 +234,7 @@ const Projects = () => {
               Discuss Your Project
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

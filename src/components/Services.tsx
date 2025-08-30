@@ -1,5 +1,10 @@
+
 import React from 'react';
-import { motion } from 'framer-motion';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
+
 import {
   Wind,
   Thermometer,
@@ -13,7 +18,92 @@ import {
   Clock
 } from 'lucide-react';
 
+gsap.registerPlugin(ScrollTrigger);
+
+
 const Services = () => {
+  const leftRef = useRef(null);
+ const rightRef = useRef(null);
+  const topRef = useRef(null);
+   const bottomRef = useRef(null);
+
+
+
+  useEffect(() => {
+    if (leftRef.current) {
+      gsap.fromTo(
+        leftRef.current,
+        { x: -200, opacity: 0 }, // starting position
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: leftRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+    if (rightRef.current) {
+      gsap.fromTo(
+        rightRef.current,
+        { x: 200, opacity: 0 }, // starting position
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: rightRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+    if (topRef.current) {
+      gsap.fromTo(
+        topRef.current,
+        { y: 200, opacity: 0 }, // starting position
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: topRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+    if (bottomRef.current) {
+      gsap.fromTo(
+        bottomRef.current,
+        { y: -200, opacity: 0 }, // starting position
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: bottomRef.current,
+            start: "top 80%", // when box enters viewport
+            end: "top 50%", // optional: when to end
+            scrub: false, // smooth scrubbing
+            toggleActions: "play none none reverse", 
+          },
+        }
+      );
+    }
+  }, []);
+ 
   const hvacServices = [
     { icon: Wind, title: 'DX System', description: 'Direct expansion air conditioning systems for efficient cooling' },
     { icon: Settings, title: 'VRV/VRF System', description: 'Variable refrigerant volume/flow systems for flexible control' },
@@ -35,136 +125,154 @@ const Services = () => {
       <div className="container mx-auto px-4">
 
         {/* Section Heading */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4 overflow-hidden" ref={leftRef} >
+            Our Services
+          </h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"  />
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto overflow-hidden" ref={rightRef}>
             Comprehensive HVAC solutions including design, execution, testing and commissioning 
             of heating, ventilation and air conditioning systems
           </p>
-        </motion.div>
+        </div>
 
         {/* Featured Services */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-8 mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ staggerChildren: 0.2 }}
-        >
+        <div className="grid md:grid-cols-3 gap-8 mb-16"ref={bottomRef}>
           {[
             {
               img: 'https://images.pexels.com/photos/8293742/pexels-photo-8293742.jpeg',
               title: 'Professional Installation',
-              desc: 'Expert HVAC system installation'
+              desc: 'Expert HVAC system installation',
             },
             {
               img: 'https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg',
               title: 'Maintenance Services',
-              desc: 'Regular maintenance and AMC'
+              desc: 'Regular maintenance and AMC',
             },
             {
               img: 'https://images.pexels.com/photos/5691658/pexels-photo-5691658.jpeg',
               title: 'System Design',
-              desc: 'Custom HVAC system design'
+              desc: 'Custom HVAC system design',
             }
           ].map((service, index) => (
-            <motion.div
-              key={index}
-              className="relative overflow-hidden rounded-lg shadow-lg group"
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-              transition={{ duration: 0.5 }}
-            >
-              <img src={service.img} alt={service.title} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent"></div>
-              <div className="absolute bottom-4 left-4 text-white">
-                <h4 className="text-xl font-bold mb-2">{service.title}</h4>
-                <p className="text-blue-100">{service.desc}</p>
+            <div key={index} className="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+              <div className="relative overflow-hidden"  >
+                <img 
+                  src={service.img} 
+                  alt={service.title} 
+                  className="w-full h-64 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 to-transparent" />
               </div>
-            </motion.div>
+
+              <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                <h4 className="text-xl font-bold mb-2">
+                  {service.title}
+                </h4>
+                <p className="text-blue-100 mb-2">
+                  {service.desc}
+                </p>
+              </div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* HVAC Services */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">HVAC Systems & Services</h3>
+        {/* <div className="mb-16">
+          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+            HVAC Systems & Services
+          </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {hvacServices.map((service, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                viewport={{ once: true }}
-              >
-                <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <h4 className="text-lg font-semibold text-gray-800 mb-3">{service.title}</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
-              </motion.div>
+              <div key={index} className="relative overflow-hidden   rounded-xl group cursor-pointer">
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100 transition-colors duration-300">
+                  <div className="mb-6">
+                    <service.icon className="w-12 h-12 text-blue-600" />
+                  </div>
+
+                  <h4 className="text-lg font-semibold text-gray-800 mb-3">
+                    {service.title}
+                  </h4>
+
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"ref={leftRef}>
+  {hvacServices.map((service, index) => {
+    const Icon = service.icon;
+    return (
+      <div
+        key={index}
+        className="relative overflow-hidden rounded-xl group cursor-pointer h-full"
+      >
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 hover:from-blue-50 hover:to-blue-100 transition-colors duration-300 h-full flex flex-col">
+          <div className="mb-6">
+            <Icon className="w-12 h-12 text-blue-600" />
+          </div>
+
+          <h4 className="text-lg font-semibold text-gray-800 mb-3">
+            {service.title}
+          </h4>
+
+          <p className="text-gray-600 text-sm leading-relaxed">
+            {service.description}
+          </p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
 
         {/* Additional Services */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">Electrical & Plumbing</h3>
+        <br></br>
+        <div ref={rightRef}>
+          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+            Electrical & Plumbing
+          </h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {additionalServices.map((service, index) => (
-              <motion.div
-                key={index}
-                className="bg-blue-50 p-8 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <service.icon className="w-16 h-16 text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300" />
-                <h4 className="text-xl font-semibold text-gray-800 mb-4">{service.title}</h4>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
-              </motion.div>
+              <div key={index} className="relative overflow-hidden group cursor-pointer">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 hover:from-blue-100 hover:to-blue-200 transition-colors duration-300">
+                  <div className="mb-6 relative">
+                    <service.icon className="w-16 h-16 text-blue-600" />
+                  </div>
+
+                  <h4 className="text-xl font-semibold text-gray-800 mb-4">
+                    {service.title}
+                  </h4>
+
+                  <p className="text-gray-600 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 rounded-lg max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Need a Custom HVAC Solution?</h3>
+        <div className="text-center mt-16" >
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8 rounded-xl max-w-4xl mx-auto shadow-xl">
+            <h3 className="text-2xl font-bold mb-4">
+              Need a Custom HVAC Solution?
+            </h3>
             <p className="text-blue-100 mb-6">
               Our mission is to deliver the best possible solution that is both technically sound and economically feasible
             </p>
             <a
               href="#contact"
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-300 inline-block"
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-300 inline-block shadow-lg"
             >
               Get Consultation
             </a>
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </section>
