@@ -81,7 +81,7 @@ const leftRef = useRef<HTMLDivElement>(null);
             icon: <Facebook size={24} />,
             bg: "bg-blue-500",
             hoverBg: "hover:bg-red-600",
-            label: "Send Email",
+            label: "follow us",
           }
     ].map(({ href, icon, bg, hoverBg, label }, idx) => (
       <a
@@ -127,7 +127,7 @@ const leftRef = useRef<HTMLDivElement>(null);
             icon: <Facebook size={24} />,
             bg: "bg-blue-500",
             hoverBg: "hover:bg-red-600",
-            label: "Send Email",
+            label: "follow us",
           }
         ].map(({ href, icon, bg, hoverBg, label }, idx) => (
           <a
