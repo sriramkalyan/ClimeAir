@@ -351,7 +351,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone Numbers',
-      details: '04362-457620\n+91 81224 57956\n+91 81224 17596'
+      details: '04362-457620\n+91 81224 57956\n+91 81224 17956'
     },
     {
       icon: Mail,
